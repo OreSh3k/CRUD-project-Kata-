@@ -19,6 +19,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void addUser(User user) {
         em.persist(user);
+
     }
     @Transactional
     @Override
