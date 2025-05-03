@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
 
+
 @Controller
 public class UserController {
 
@@ -30,8 +31,9 @@ public class UserController {
         return "addUser";  // Имя HTML страницы (addUserForm.html)
     }
 
-    @PostMapping("/addUser")
-    public String addUser(
+
+    @PostMapping("/add")
+    public String add(
             @RequestParam("name") String name,
             @RequestParam("lastName") String lastName,
             @RequestParam("email") String email,
