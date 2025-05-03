@@ -3,30 +3,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cars list</title>
+    <title>Users list</title>
 <style>
     table{
         border-collapse: collapse;
         width: 100%
     }
     th, td {
-        border: 1px #0e7780;
+        border: 1px solid black;
         padding: 8px;
         text-align: left;
     }
 </style>
 </head>
 <body>
-<h1> Cars list</h1>
+<h1> Users List</h1>
 <table>
     <tr>
-        <th>Model</th>
-        <th>Color</th>
+        <th>Name</th>
+        <th>LastName</th>
+        <th>Email</th>
     </tr>
     <tr>
-        <tr th:each="car : ${cars}">
-            <td th:text="${car.model}"> Model </td>
-            <td th:text="${car.color}">Color </td>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.name}"> Name </td>
+            <td th:text="${user.lastName}">LastName </td>
+            <td th:text="${user.email}"> Email </td>
         </tr>
     </tr>
 </table>
