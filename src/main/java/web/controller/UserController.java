@@ -46,10 +46,7 @@ public class UserController {
 
         userService.addUser(user);
 
-        System.out.println(user);
-
-        model.addAttribute("message", "Пользователь успешно добавлен!");
-        return "success";
+        return "redirect:/users";
     }
 
 
