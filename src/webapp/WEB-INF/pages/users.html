@@ -1,36 +1,56 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Users list</title>
-<style>
-    table{
-        border-collapse: collapse;
-        width: 100%
-    }
-    th, td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: left;
-    }
-</style>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        form {
+            display: inline;
+        }
+    </style>
 </head>
 <body>
-<h1> Users List</h1>
+<h1>Users List</h1>
+
 <table>
+    <thead>
     <tr>
         <th>Name</th>
         <th>LastName</th>
         <th>Email</th>
+        <th>Actions</th>
     </tr>
-    <tr>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.name}"> Name </td>
-            <td th:text="${user.lastName}">LastName </td>
-            <td th:text="${user.email}"> Email </td>
-        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.name}">Name</td>
+        <td th:text="${user.lastName}">LastName</td>
+        <td th:text="${user.email}">Email</td>
+        <td>
+            <a th:href="@{/editUserForm(id=${user.id})}">Edit</a>
+            |
+            <form th:action="@{/deleteUser(id=${user.id})}" method="post">
+                <button type="submit" onclick="return confirm('Delete user?')">Delete</button>
+            </form>
+        </td>
     </tr>
+    </tbody>
+
+    <!-- Кнопка для перехода на форму добавления нового пользователя -->
+    <form action="/addUserForm" method="get">
+        <button type="submit">Add new user</button>
+    </form>
+
 </table>
+
 </body>
 </html>
