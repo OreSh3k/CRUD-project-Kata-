@@ -15,7 +15,7 @@ public interface UserService {
 
     public Optional<User> findUser(int id);
 
-    public List<User> findUserByNameAndEmail(String email, String name);
+    public List<User> findUserByNameOrEmail(String name, String email);
 
     public List<User> getAllUsers();
 }

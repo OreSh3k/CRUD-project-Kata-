@@ -89,10 +89,10 @@ public class UserController {
     }
 
     @GetMapping("/search")
-    public String searchUser(@RequestParam String name,
-                             @RequestParam String email,
+    public String searchUser(@RequestParam(required = false) String name,
+                             @RequestParam(required = false) String email,
                              Model model) {
-        List<User> users = userService.findUserByNameAndEmail(name, email);
+        List<User> users = userService.findUserByNameOrEmail(name, email);
         model.addAttribute("users", users);
         return "users";
     }

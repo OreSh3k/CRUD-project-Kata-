@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 import web.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,8 +41,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUserByNameAndEmail(String email, String name) {
-        return findUserByNameAndEmail(email, name);
+    public List<User> findUserByNameOrEmail(String name, String email) {
+        if(!name.isEmpty() && !email.isEmpty()) {
+            return userRepository.findByNameAndEmail(name, email);
+        }else if(!name.isEmpty()) {
+            return userRepository.findByName(name);
+        }else if(!email.isEmpty()) {
+            return userRepository.findByEmail(email);
+        }else{
+            return new ArrayList<User>();
+        }
     }
 
 
