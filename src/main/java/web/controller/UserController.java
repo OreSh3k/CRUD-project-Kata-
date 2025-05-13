@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
 
+import java.util.List;
+import java.util.Optional;
+
 
 @Controller
 public class UserController {
@@ -53,7 +56,7 @@ public class UserController {
     //Форма для редактирования
     @GetMapping("/editUserForm")
     public String showEditUserForm(@RequestParam("id") int id, Model model) {
-        User user = userService.findUser(id);
+        Optional<User> user = userService.findUser(id);
         model.addAttribute("user", user);
         return "editUser"; // Это HTML-страница для редактирования
     }
@@ -83,6 +86,15 @@ public class UserController {
         user.setEmail("test@example.com");
         userService.addUser(user);
         return "OK";
+    }
+
+    @GetMapping("/search")
+    public String searchUser(@RequestParam String name,
+                             @RequestParam String email,
+                             Model model) {
+        List<User> users = userService.findUserByNameAndEmail(name, email);
+        model.addAttribute("users", users);
+        return "users";
     }
 
 

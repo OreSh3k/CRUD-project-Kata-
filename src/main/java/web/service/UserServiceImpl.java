@@ -6,6 +6,7 @@ import web.model.User;
 import web.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,23 +22,33 @@ public class UserServiceImpl implements UserService {
     public void addUser(User user) {
         userRepository.save(user);
     }
+
     @Transactional()
     public void updateUser(User user) {
         userRepository.save(user);
     }
+
     @Transactional
     public void deleteUserById(int id) {
         userRepository.deleteById(id);
     }
+
     @Transactional
     @Override
-    public User findUser(int id) {
-       return userRepository.findById(id).orElse(null);
+    public Optional<User> findUser(int id) {
+        return userRepository.findById(id);
     }
+
+    @Override
+    public List<User> findUserByNameAndEmail(String email, String name) {
+        return findUserByNameAndEmail(email, name);
+    }
+
+
     @Transactional
     @Override
     public List<User> getAllUsers() {
-    return userRepository.findAll();
+        return userRepository.findAll();
     }
 }
 

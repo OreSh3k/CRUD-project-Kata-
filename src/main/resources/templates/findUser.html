@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Список пользователей</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f0f0f0; }
+    form { margin-bottom: 20px; }
+    input[type="text"] { padding: 6px; width: 200px; }
+    input[type="submit"] { padding: 6px 12px; }
+  </style>
+</head>
+<body>
+
+<h2>Поиск пользователя</h2>
+
+<form th:action="@{/search}" method="get">
+  <input type="text" name="name" placeholder="Имя" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <button type="submit">Поиск</button>
+</form>
+
+<h2>Список пользователей</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.id}"></td>
+    <td th:text="${user.name}"></td>
+    <td th:text="${user.lastName}"></td>
+    <td th:text="${user.email}"></td>
+  </tr>
+  <tr th:if="${users.isEmpty()}">
+    <td colspan="4">Ничего не найдено.</td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
