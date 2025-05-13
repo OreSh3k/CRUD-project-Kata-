@@ -69,8 +69,7 @@ public class UserController {
     //Удаления юзера
     @PostMapping("/deleteUser")
     public String deleteUser(@RequestParam("id") int id) {
-        User user = userService.findUser(id);
-        userService.deleteUserById(user, id);
+        userService.deleteUserById(id);
         return "redirect:/users";
     }
 
